@@ -1,0 +1,32 @@
+﻿@model TempModel
+
+<h2>Temperature Converter</h2>
+
+<form asp-controller="Random" asp-action="temp" method="post">
+    <h6 style="color:red; padding:20px;">
+        @Html.ValidationMessageFor(m => m.Value)
+    </h6>
+    <div class="form-control">
+        <label for="Value">Temperature Value:</label>
+        @Html.TextBoxFor(model => model.Value)
+        Scale: @Html.DropDownListFor(model => model.ConvertToScale, (SelectList)ViewBag.Scales)
+    </div>
+
+    <div class="form-control">
+        <label for="Scale">Convert to:</label>
+        @Html.DropDownListFor(model => model.Scale, (SelectList)ViewBag.Scales)
+    </div>
+
+    <div>
+        
+        <input type="submit" value="Calculate" class="btn btn-success" />
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <div class="result">
+    <p>Result:</p>
+    <h3>@Model.ConvertedValue</h3>
+    </div>
+}
